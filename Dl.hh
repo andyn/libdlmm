@@ -1,5 +1,5 @@
-#ifndef LIB_DLPP_H
-#define LIB_DLPP_H
+#ifndef LIBDLPP_DL_HH
+#define LIBDLPP_DL_HH
 
 #include <cassert>
 #include <dlfcn.h>
@@ -80,4 +80,4 @@ private:
     void *m_library; // Pointer to the opened library file
 };
 
-#endif // LIB_DLPP_H
+#endif // LIBDLPP_DL_HH

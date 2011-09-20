@@ -14,7 +14,7 @@ Usage
 Link with -ldl. A simple usage example is illustrated below. 
 
 
-#include <dlpp.hh>
+#include <Dl.hh>
 #include <iostream>
 
 int main(void) {

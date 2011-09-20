@@ -3,7 +3,7 @@
 #endif
 
 #include <iostream>
-#include "dlpp.hh"
+#include "Dl.hh"
 
 int main(void) {
     Dl dl("libuseless.so");
