@@ -1,12 +1,14 @@
-libdlpp-0.1
+libdlmm-0.2
 ===========
 
 About the library
 -----------------
 
-Libdlpp is a thin wrapper for POSIX libdl (dlopen, dlsym, dlclose, dlerror, 
+Libdlmm is a thin wrapper for POSIX libdl (dlopen, dlsym, dlclose, dlerror, 
 linked with -ldl). GNU dlvsym is also supported.
 
+The name libdlmm is derived from other projects (namely gtkmm) that provide
+C++ wrappers for C libraries.
 
 Usage
 -----
@@ -14,7 +16,7 @@ Usage
 Link with -ldl. A simple usage example is illustrated below. 
 
 
-#include <Dl.hh>
+#include <dlmm.hh>
 #include <iostream>
 
 int main(void) {
