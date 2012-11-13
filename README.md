@@ -16,19 +16,19 @@ Usage
 Link with -ldl. A simple usage example is illustrated below. 
 
 
-#include <dlmm.hh>
-#include <iostream>
-
-int main(void) {
-    try {
-        Dl dl("libuseless.so");
-        std::cout << *dl.symbol<int>("variable") << std::endl;
-        std::cout << dl.symbol<int(std::string, int)>("function")("a", 1) << std::endl;
-    }
-    catch (std::runtime_error e) {
-        std::cerr << "Could not open library file" << std::endl;
-    }
-}
+	#include <dlmm.hh>
+	#include <iostream>
+	
+	int main(void) {
+	    try {
+	        Dl dl("libuseless.so");
+	        std::cout << *dl.symbol<int>("variable") << std::endl;
+	        std::cout << dl.symbol<int(std::string, int)>("function")("a", 1) << std::endl;
+	    }
+	    catch (std::runtime_error e) {
+	        std::cerr << "Could not open library file" << std::endl;
+	    }
+	}
 
 
 Author(s)
