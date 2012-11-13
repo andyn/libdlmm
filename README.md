@@ -40,9 +40,8 @@ Antti Nilakari <antti.nilakari@gmail.com>
 License
 -------
 
-The aforementioned authors deem that the program source code is simple enough
-so as not to be considered a work of art and thus it's not eligible for copyright.
-Use the library wrapper as you seem fit, however, no warranty of any kind is
-given. License requirements inherited from POSIX libdl probably also set some
-limits for redistributing a program compiled against this library.
+No warranty is given. You are at your own risk. You have been warned.
 
+You are allowed to use and redistribute this library wrapper and all accompanying
+material as you see fit. However, linking your program against libdl likely
+requires you to adhere to its license.
