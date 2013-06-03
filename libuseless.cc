@@ -1,10 +1,11 @@
 #include <iostream>
+#include <string>
 
 extern "C" {
-    int variable = 42;
+    int meaning_of_life = 42;
 
-    int function(std::string const &str, int increment) {
-        std::cout << str << std::endl;
+    int print_and_increment(std::ostream &out, std::string const &str, int increment) {
+        out << str;
         return increment + 1;
     }
 }

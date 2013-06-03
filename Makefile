@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++98 -pedantic -Wall -Wextra -I.
+CFLAGS = -std=c++11 -pedantic -Wall -Wextra -Weffc++ -O0 -g
 
 
 all: dltest.cc libuseless.cc

@@ -25,12 +25,12 @@ public:
         dlclose(m_library);
     }
 
-    /** @short Get a pointer to a symbol in a library.
+    /** @short Get a reference to a symbol in a library.
      * @param Name of the symbol to search for.
-     * @return A pointer to given symbol of type T.
+     * @return A reference to given symbol of type T.
      * @exception std::runtime_error If the given symbol cannot be found. */ 
     template <typename T>
-    T* symbol(std::string const &symbol_name) const {
+    T& symbol(std::string const &symbol_name) const {
         // Convert a void pointer to a function pointer without warnings.
         // Since we're type punning, make sure that pointer sizes do not differ.
         assert(sizeof(void*) == sizeof(void(*)()));
@@ -43,7 +43,7 @@ public:
         if (ptr.m_void == 0)
             throw std::runtime_error(std::string("Dl::symbol(\"" + symbol_name + "\"): ") + dlerror());
 
-        return ptr.m_real;
+        return *ptr.m_real;
     }
 
 #ifdef _GNU_SOURCE // GNU extensions
