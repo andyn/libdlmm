@@ -1,4 +1,4 @@
-libdlmm-0.2
+libdlmm-0.3
 ===========
 
 About the library
@@ -21,12 +21,13 @@ Link with -ldl. A simple usage example is illustrated below.
 	
 	int main(void) {
 	    try {
-	        Dl dl("libuseless.so");
-	        std::cout << *dl.symbol<int>("variable") << std::endl;
-	        std::cout << dl.symbol<int(std::string, int)>("function")("a", 1) << std::endl;
+	        Dl dl("some_library.so");
+	        std::cout << dl.symbol<int>("variable_name") << std::endl;
+	        std::cout << dl.symbol<int(std::string const &, int)>("function_name")("a", 1) << std::endl;
 	    }
 	    catch (std::runtime_error e) {
-	        std::cerr << "Could not open library file" << std::endl;
+	        std::cerr << "Library error" << std::endl;
+	        return 1;
 	    }
 	}
 
