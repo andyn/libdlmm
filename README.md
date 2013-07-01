@@ -5,7 +5,7 @@ About the library
 -----------------
 
 Libdlmm is a thin wrapper for POSIX libdl (dlopen, dlsym, dlclose, dlerror, 
-linked with -ldl). GNU dlvsym is also supported.
+linked with -ldl) and MS Windows (LoadLibraryEx, FreeLibrary, GetProcAddress). GNU dlvsym is also supported.
 
 The name libdlmm is derived from other projects (namely gtkmm) that provide
 C++ wrappers for C libraries.
@@ -13,7 +13,8 @@ C++ wrappers for C libraries.
 Usage
 -----
 
-Link with -ldl. A simple usage example is illustrated below. 
+Link with -ldl. A simple usage example is illustrated below.
+on MS Windows a linking flag isn't necissary
 
 
 	#include <dlmm.hh>
