@@ -114,7 +114,9 @@ class Dl {
 public:
     /** @short Open a dynamic library file.
      * @exception std::runtime_error If the library cannot be opened.
-     * @param filename Library file name. */
+     * @param filename Library file name. 
+     * @param flags to pass to LoadLibraryEx
+     */
     explicit Dl(const std::string &filename, DWORD flags = 0) throw (std::runtime_error)
         : m_library(LoadLibraryEx(TEXT( filename.c_str() ), nullptr, flags) ) {
         //see http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
