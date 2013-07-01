@@ -33,7 +33,9 @@ public:
         : m_library(dlopen(filename, flags)) {
 
         if (m_library == nullptr)
-            throw std::runtime_error(std::string("Dl::Dl(\"" + std::string(filename) + "\"): ") + dlerror());
+            throw std::runtime_error(
+                std::string("Dl::Dl(\"" + std::string(filename) + "\"): ") + dlerror()
+            );
     }
 
     /** @short Close a dynamic library file. */
@@ -57,7 +59,9 @@ public:
 
         ptr.m_void = dlsym(m_library, symbol_name.c_str());
         if (ptr.m_void == 0)
-            throw std::runtime_error(std::string("Dl::symbol(\"" + symbol_name + "\"): ") + dlerror());
+            throw std::runtime_error(
+                std::string("Dl::symbol(\"" + symbol_name + "\"): ") + dlerror()
+            );
 
         return ptr.m_real;
     }
@@ -82,7 +86,10 @@ public:
 
         ptr.m_void = dlvsym(m_library, symbol_name.c_str(), version.c_str());
         if (ptr.m_void == 0)
-            throw std::runtime_error(std::string("Dl::symbol(\"" + symbol_name + "\", \"" + version + "\"): ") + dlerror());
+            throw std::runtime_error(
+                std::string("Dl::symbol(\"" + symbol_name + "\", \"" + version + "\"): ") +
+                dlerror()
+            );
 
         return ptr.m_real;
     }
@@ -113,7 +120,9 @@ public:
         //see http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
         //for flags
         if (m_library == nullptr) {
-            throw std::runtime_error(std::string("Dl::Dl(\"" + filename + "\"): ") + "library not found! " + filename);
+            throw std::runtime_error(
+                std::string("Dl::Dl(\"" + filename + "\"): ") + "library not found! " + filename
+            );
         }
     }
 
@@ -125,7 +134,10 @@ public:
         //see http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
         //for flags
         if (m_library == nullptr) {
-            throw std::runtime_error( std::string("Dl::Dl(\"" + std::string(filename) + "\"): ") + "library not found! " + std::string(filename) );
+            throw std::runtime_error(
+                std::string("Dl::Dl(\"" + std::string(filename) + "\"): ") + 
+                "library not found! " + std::string(filename)
+            );
         }
     }
 
@@ -150,7 +162,9 @@ public:
 
         ptr.m_void = GetProcAddress(m_library, symbol_name.c_str());
         if (ptr.m_void == nullptr)
-            throw std::runtime_error(std::string("Dl::symbol(\"" + symbol_name + "\"): ") + "symbol not found! ");
+            throw std::runtime_error(
+                std::string("Dl::symbol(\"" + symbol_name + "\"): ") + "symbol not found! "
+            );
 
         return ptr.m_real;
     }    
@@ -161,3 +175,19 @@ private:
 
 #endif
 #endif // LIBDLPP_DL_HH
+
+//use the following to make a factory function (for dynamic objects) visible to the C linker
+#define MAKE_FACTORY_FUNCTION(TYPENAME) \
+extern "C" { \
+    struct TYPENAME ; \
+    const TYPENAME * TYPENAME##_factory () { \
+        return new TYPENAME ; \
+    } \
+}
+
+//use the following to make a static symbol, visible to user code and the C linker
+#define MAKE_VISBLE_SYMBOL(SYMBOL_TYPE, SYMBOL_NAME) \
+extern "C" { \
+    struct SYMBOL_TYPE  ; \
+    SYMBOL_TYPE SYMBOL_NAME ; \
+}
