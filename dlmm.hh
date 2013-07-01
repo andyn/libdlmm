@@ -176,7 +176,6 @@ private:
 };
 
 #endif
-#endif // LIBDLPP_DL_HH
 
 //use the following to make a factory function (for dynamic objects) visible to the C linker
 #define MAKE_FACTORY_FUNCTION(TYPENAME) \
@@ -193,3 +192,5 @@ extern "C" { \
     struct SYMBOL_TYPE  ; \
     SYMBOL_TYPE SYMBOL_NAME ; \
 }
+
+#endif // LIBDLPP_DL_HH
