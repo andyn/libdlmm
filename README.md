@@ -16,22 +16,22 @@ Usage
 Link with -ldl. A simple usage example is illustrated below.
 on MS Windows a linking flag isn't necissary
 
+```cpp
+#include <dlmm.hh>
+#include <iostream>
 
-	#include <dlmm.hh>
-	#include <iostream>
-	
-	int main(void) {
-	    try {
-	        Dl dl("some_library.so");
-	        std::cout << dl.symbol<int>("variable_name") << std::endl;
-	        std::cout << dl.symbol<int(std::string const &, int)>("function_name")("a", 1) << std::endl;
-	    }
-	    catch (std::runtime_error e) {
-	        std::cerr << "Library error" << std::endl;
-	        return 1;
-	    }
-	}
-
+int main(void) {
+    try {
+        Dl dl("some_library.so");
+        std::cout << dl.symbol<int>("variable_name") << std::endl;
+        std::cout << dl.symbol<int(std::string const &, int)>("function_name")("a", 1) << std::endl;
+    }
+    catch (std::runtime_error e) {
+        std::cerr << "Library error" << std::endl;
+        return 1;
+    }
+}
+```
 
 Author(s)
 ---------
