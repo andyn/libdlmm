@@ -5,7 +5,7 @@ About the library
 -----------------
 
 Libdlmm is a thin wrapper for POSIX libdl (dlopen, dlsym, dlclose, dlerror, 
-linked with -ldl). GNU dlvsym is also supported.
+linked with -ldl) and MS Windows (LoadLibraryEx, FreeLibrary, GetProcAddress). GNU dlvsym is also supported.
 
 The name libdlmm is derived from other projects (namely gtkmm) that provide
 C++ wrappers for C libraries.
@@ -13,24 +13,25 @@ C++ wrappers for C libraries.
 Usage
 -----
 
-Link with -ldl. A simple usage example is illustrated below. 
+Link with -ldl. A simple usage example is illustrated below.
+on MS Windows a linking flag isn't necissary
 
+```cpp
+#include <dlmm.hh>
+#include <iostream>
 
-	#include <dlmm.hh>
-	#include <iostream>
-	
-	int main(void) {
-	    try {
-	        Dl dl("some_library.so");
-	        std::cout << dl.symbol<int>("variable_name") << std::endl;
-	        std::cout << dl.symbol<int(std::string const &, int)>("function_name")("a", 1) << std::endl;
-	    }
-	    catch (std::runtime_error e) {
-	        std::cerr << "Library error" << std::endl;
-	        return 1;
-	    }
-	}
-
+int main(void) {
+    try {
+        Dl dl("some_library.so");
+        std::cout << dl.symbol<int>("variable_name") << std::endl;
+        std::cout << dl.symbol<int(std::string const &, int)>("function_name")("a", 1) << std::endl;
+    }
+    catch (std::runtime_error e) {
+        std::cerr << "Library error" << std::endl;
+        return 1;
+    }
+}
+```
 
 Author(s)
 ---------
