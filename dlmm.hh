@@ -16,7 +16,7 @@ class Dl {
     explicit Dl(std::string const &filename, int flags = RTLD_LAZY)
         : m_library(dlopen(filename.c_str(), flags)) {
 
-        if (m_library == 0)
+        if (m_library == nullptr)
             throw std::runtime_error(
                 std::string("Dl::Dl(\"" + filename + "\"): ") + dlerror());
     }
@@ -38,7 +38,7 @@ class Dl {
         } ptr;
 
         ptr.m_void = dlsym(m_library, symbol_name.c_str());
-        if (ptr.m_void == 0)
+        if (ptr.m_void == nullptr)
             throw std::runtime_error(
                 std::string("Dl::symbol(\"" + symbol_name + "\"): ") +
                 dlerror());
@@ -66,7 +66,7 @@ class Dl {
         } ptr;
 
         ptr.m_void = dlvsym(m_library, symbol_name.c_str(), version.c_str());
-        if (ptr.m_void == 0)
+        if (ptr.m_void == nullptr)
             throw std::runtime_error(std::string("Dl::symbol(\"" + symbol_name +
                                                  "\", \"" + version + "\"): ") +
                                      dlerror());
