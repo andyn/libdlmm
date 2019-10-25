@@ -79,6 +79,9 @@ class Dl {
 #endif // _GNU_SOURCE
 
   private:
+    Dl(Dl const &);
+    Dl operator=(Dl const &);
+
     void *m_library; // Pointer to the opened library file
 };
 
