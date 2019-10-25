@@ -9,7 +9,7 @@
 #include "dlmm.hh"
 
 int main(void) {
-    Dl dl("libuseless.so");
+    Dl dl("./libuseless.so");
 
     // Reading variables from a dynamic library
 
@@ -87,7 +87,7 @@ int main(void) {
     std::cout << "Loading nonexistent version of an existing symbol..."
               << std::endl;
     try {
-        std::cout << *dl.symbol<int>("meaning_of_life", "DOES_NOT_EXIST");
+        std::cout << dl.symbol<int>("meaning_of_life", "DOES_NOT_EXIST");
         std::cout << "TEST FAILED: nonexistent version of existing symbol did "
                      "not throw."
                   << std::endl;
