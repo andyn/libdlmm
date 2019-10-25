@@ -15,10 +15,11 @@ int main(void) {
 
     std::cout << "Reading and modifying a local copy of variable in library..."
               << std::endl;
-    int my_meaning_of_life = dl.symbol<int>("meaning_of_life");
-    my_meaning_of_life = -1;
-    (void)my_meaning_of_life;
-    if (dl.symbol<int>("meaning_of_life") != 42) {
+    int my_answer =
+        dl.symbol<int>("answer_to_life_the_universe_and_everything");
+    my_answer = -1;
+    (void)my_answer;
+    if (dl.symbol<int>("answer_to_life_the_universe_and_everything") != 42) {
         std::cout << "TEST FAILED: variable was changed inside library."
                   << std::endl;
         return -1;
@@ -26,14 +27,15 @@ int main(void) {
 
     std::cout << "Reading and changing a referenced variable in library..."
               << std::endl;
-    int &meaning_of_life = dl.symbol<int>("meaning_of_life");
-    if (meaning_of_life != 42) {
-        std::cout << "TEST FAILED: Expected 42, got " << meaning_of_life
+    int &my_better_answer =
+        dl.symbol<int>("answer_to_life_the_universe_and_everything");
+    if (my_better_answer != 42) {
+        std::cout << "TEST FAILED: Expected 42, got " << my_better_answer
                   << std::endl;
         return -1;
     }
-    meaning_of_life = -1;
-    if (dl.symbol<int>("meaning_of_life") != -1) {
+    my_better_answer = 11; // This one goes to eleven!
+    if (dl.symbol<int>("answer_to_life_the_universe_and_everything") != 11) {
         std::cout << "TEST FAILED: could not change variable inside library."
                   << std::endl;
         return -1;
@@ -48,19 +50,18 @@ int main(void) {
 
     std::string input_string = "Hello World!";
     std::ostringstream output_string;
-    int increment_by_one = 100;
-    int incremented_by_one =
-        print_and_increment(output_string, input_string, increment_by_one);
+    int incremented_via_reference =
+        print_and_increment(output_string, input_string, 100);
     if (output_string.str() != input_string) {
         std::cout << "TEST FAILED: function did not stream correct value "
                   << "(expected " << input_string << ", got "
                   << output_string.str() << ")." << std::endl;
         return -1;
     }
-    if (increment_by_one + 1 != incremented_by_one) {
+    if (101 != incremented_via_reference) {
         std::cout << "TEST FAILED: function did not return correct value "
-                  << "(expected " << increment_by_one + 1 << ", got "
-                  << incremented_by_one << ")." << std::endl;
+                  << "(expected " << 101 << ", got "
+                  << incremented_via_reference << ")." << std::endl;
         return -1;
     }
 
@@ -87,7 +88,8 @@ int main(void) {
     std::cout << "Loading nonexistent version of an existing symbol..."
               << std::endl;
     try {
-        std::cout << dl.symbol<int>("meaning_of_life", "DOES_NOT_EXIST");
+        std::cout << dl.symbol<int>(
+            "answer_to_life_the_universe_and_everything", "DOES_NOT_EXIST");
         std::cout << "TEST FAILED: nonexistent version of existing symbol did "
                      "not throw."
                   << std::endl;
