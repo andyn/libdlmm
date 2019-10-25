@@ -55,7 +55,7 @@ class Dl {
      * @return A pointer to given symbol of type T.
      * @exception std::runtime_error If the given symbol cannot be found. */
     template <typename T>
-    T *symbol(std::string const &symbol_name,
+    T &symbol(std::string const &symbol_name,
               std::string const &version) const {
         // Convert a void pointer to a function pointer without warnings.
         // Since we're type punning, make sure that pointer sizes do not differ.
@@ -71,7 +71,7 @@ class Dl {
                                                  "\", \"" + version + "\"): ") +
                                      dlerror());
 
-        return ptr.m_real;
+        return *ptr.m_real;
     }
 
     // Dladdr() is not yet supported in a meaningful way.
